@@ -32,8 +32,10 @@ namespace Netrunner.View
             else
                 serverSprites.Clear();
 
+            
             for (int i = 0; i < servers.Count; i++) {
-                Sprite serverSprite = new Sprite(background, new Vector2(Bounds.X + xOffset * i, Bounds.Y), Color.LightSalmon);
+                // (i+1) to get an inital offset
+                Sprite serverSprite = new Sprite(background, new Vector2(Bounds.X + xOffset * (i + 1), Bounds.Y), Color.LightSalmon);
                 serverSprites.Add(serverSprite);
             }
         }

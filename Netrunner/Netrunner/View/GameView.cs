@@ -58,9 +58,9 @@ namespace Netrunner.View
 
             localHand.LoadContent(Game.Content);
             remoteHand.LoadContent(Game.Content);
-            localMainBoard.LoadContent(Game.Content, new Vector2((3 * width / 4), 860));
-            remoteMainBoard.LoadContent(Game.Content, new Vector2((width / 8), 60));
-            remoteServers.LoadContent(Game.Content, new Vector2(500, 860));
+            localMainBoard.LoadContent(Game.Content, new Vector2(width / 2, 640));
+            remoteMainBoard.LoadContent(Game.Content, new Vector2((width / 2), 60));
+            remoteServers.LoadContent(Game.Content, new Vector2(width / 2, 640));
 
             views = new List<View>();
             //views.Add(localHand);
@@ -103,8 +103,8 @@ namespace Netrunner.View
 
             spriteBatch.Begin();
 
-            localHand.Draw(new Vector2((width / 2) - (localHand.Width / 2), 860), spriteBatch);
-            remoteHand.Draw(new Vector2((width / 2) - (remoteHand.Width / 2), 60), spriteBatch);
+            localHand.Draw(new Vector2((4 * width / 5) - (localHand.Width / 2), 640), spriteBatch);
+            remoteHand.Draw(new Vector2((width / 5) - (remoteHand.Width / 2), 60), spriteBatch);
 
             localMainBoard.Draw(spriteBatch);
             remoteMainBoard.Draw(spriteBatch);
