@@ -16,7 +16,7 @@ namespace Netrunner.Core
         public int VictoryPoints { get; protected set; }
         public int Tags { get; protected set; }
 
-        public List<Card> Deck { get; protected set; }
+        public int DeckCount { get; protected set; }
         public List<Card> DiscardPile { get; protected set; }
         public List<Card> Hand { get; protected set; }
 
@@ -25,12 +25,14 @@ namespace Netrunner.Core
 
         public Player()
         {
-            Deck = new List<Card>();
-            for (int i = 0; i < 10; i++) {
-                Deck.Add(new Card());
-            }
-
+            DeckCount = 10;
             DiscardPile = new List<Card>();
+        }
+
+        public void OnDrawCard(Card card)
+        {
+            DeckCount--;
+            Hand.Add(card);
         }
     }
 }

@@ -42,8 +42,8 @@ namespace Netrunner.View
             localHand = new HandView();
             remoteHand = new HandView();
 
-            localMainBoard = new MainBoardView();
-            remoteMainBoard = new MainBoardView();
+            localMainBoard = new MainBoardView(GameModel.Instance.LocalPlayer);
+            remoteMainBoard = new MainBoardView(GameModel.Instance.RemotePlayer);
 
             remoteServers = new RemoteServersView();
 
@@ -77,9 +77,6 @@ namespace Netrunner.View
             Player remotePlayer = model.RemotePlayer;
             localHand.Cards = localPlayer.Hand;
             remoteHand.Cards = remotePlayer.Hand;
-
-            localMainBoard.Update(localPlayer.Deck, localPlayer.DiscardPile);
-            remoteMainBoard.Update(remotePlayer.Deck, remotePlayer.DiscardPile);
 
             if (localPlayer is Corporation) {
                 Corporation corp = (Corporation)localPlayer;

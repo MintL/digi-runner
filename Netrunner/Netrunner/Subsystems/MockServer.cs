@@ -10,11 +10,9 @@ namespace Netrunner.Subsystems
     {
         public void DrawCard()
         {
-            List<Card> deck = GameModel.Instance.LocalPlayer.Deck;
+            Card card = new Card();
 
-            Card card = deck[0];
-
-            //GameModel.Instance.LocalPlayer.OnDrawCard(card);
+            GameModel.Instance.LocalPlayer.OnDrawCard(card);
         }
     }
 }

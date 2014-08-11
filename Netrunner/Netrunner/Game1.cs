@@ -20,6 +20,8 @@ namespace Netrunner {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        KeyboardState oldKeyboard;
+
         public Game1() {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -32,10 +34,14 @@ namespace Netrunner {
         /// and initialize them as well.
         /// </summary>
         protected override void Initialize() {
-            graphics.PreferredBackBufferWidth = 1920;
-            graphics.PreferredBackBufferHeight = 1080;
+            graphics.PreferredBackBufferWidth = 1280;
+            graphics.PreferredBackBufferHeight = 800;
+
+            graphics.IsFullScreen = false;
             graphics.ApplyChanges();
-           
+
+            
+
             IsMouseVisible = true;
 
             GameModel.NewInstance(new MockServer());
@@ -69,9 +75,18 @@ namespace Netrunner {
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime) {
+            KeyboardState keyboard = Keyboard.GetState();
+            
             // Allows the game to exit
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
+
+            if (oldKeyboard.IsKeyUp(Keys.Enter) && keyboard.IsKeyDown(Keys.Enter) && keyboard.IsKeyDown(Keys.LeftAlt)) {
+                graphics.ToggleFullScreen();
+                graphics.ApplyChanges();
+            }
+
+            oldKeyboard = keyboard;
 
             base.Update(gameTime);
         }

@@ -17,10 +17,10 @@ namespace Netrunner.Presenter
 
         public void OnDeckClicked()
         {
-            List<Card> deck = model.LocalPlayer.Deck;
+            int deckCount = model.LocalPlayer.DeckCount;
             List<Card> hand = model.LocalPlayer.Hand;
 
-            if (deck.Count > 0) {
+            if (deckCount > 0) {
                 model.Server.DrawCard();
 
                 

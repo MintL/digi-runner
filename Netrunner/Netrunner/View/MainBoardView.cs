@@ -16,29 +16,19 @@ namespace Netrunner.View
         private SpriteFont gameFont;
         private int cardOffset;
 
-        private List<Card> deck;
-        private List<Card> discardPile;
+        private int deckCount;
+        private int discardPileCount;
 
         private Sprite deckSprite;
         private Sprite discardPileSprite;
 
         private MainBoardController controller;
+        private Player player;
 
-        public MainBoardView()
+        public MainBoardView(Player player)
         {
             controller = new MainBoardController();
-        }
-
-        public void Update(List<Card> deck, List<Card> discardPile)
-        {
-            //this.deckSprite.Position = new Vector2(Bounds.X, Bounds.Y);
-            //this.discardPileSprite.Position = ;
-
-            
-
-            this.deck = deck;
-            this.discardPile = discardPile;
-            
+            this.player = player;
         }
 
         public override void OnClicked(Point mousePosition)
@@ -63,20 +53,22 @@ namespace Netrunner.View
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            
-            if (deck.Count > 0) {
+            deckCount = player.DeckCount;
+            discardPileCount = player.DiscardPile.Count;
+
+            if (deckCount > 0) {
                 deckSprite.Draw(spriteBatch);
             }
-            String text = deck.Count.ToString();
+            String text = deckCount.ToString();
             Vector2 textPos = deckSprite.Position + (new Vector2(deckSprite.Texture.Bounds.Width, deckSprite.Texture.Bounds.Height)) / 2 - 
                 gameFont.MeasureString(text) / 2;
             spriteBatch.DrawString(gameFont, text, textPos, Color.White);
 
             
-            if (discardPile.Count > 0) {
+            if (discardPileCount > 0) {
                 discardPileSprite.Draw(spriteBatch);
             }
-            text = discardPile.Count.ToString();
+            text = discardPileCount.ToString();
             textPos = discardPileSprite.Position + (new Vector2(discardPileSprite.Texture.Bounds.Width, discardPileSprite.Texture.Bounds.Height)) / 2 -
                 gameFont.MeasureString(text) / 2;
             spriteBatch.DrawString(gameFont, text, textPos, Color.White);  
