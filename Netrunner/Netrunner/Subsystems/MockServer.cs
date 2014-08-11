@@ -10,7 +10,7 @@ namespace Netrunner.Subsystems
     {
         public void DrawCard()
         {
-            Card card = new Card();
+            Card card = new Card(Card.Types.HIDDEN);
 
             GameModel.Instance.LocalPlayer.OnDrawCard(card);
         }

@@ -11,27 +11,25 @@ using Netrunner.Presenter;
 
 namespace Netrunner.View
 {
-    public class MainBoardView : View
+    public class CorpDeckView : View
     {
         private SpriteFont gameFont;
         private int cardOffset;
 
         private int deckCount;
-        private int discardPileCount;
 
         private Sprite deckSprite;
-        private Sprite discardPileSprite;
 
         private MainBoardController controller;
-        private Player player;
+        private Corporation corp;
 
         Texture2D background;
         Texture2D backgroundEmpty;
-
-        public MainBoardView(Player player)
+        
+        public CorpDeckView(Corporation corp)
         {
             controller = new MainBoardController();
-            this.player = player;
+            this.corp = corp;
         }
 
         public override void OnClicked(Point mousePosition)
@@ -45,20 +43,17 @@ namespace Netrunner.View
         {
             background = content.Load<Texture2D>("card");
             backgroundEmpty = content.Load<Texture2D>("cardEmpty");
-            cardOffset = background.Bounds.Width + 10;
 
-            Bounds = new Rectangle((int)position.X, (int)position.Y, (cardOffset) * 2, background.Bounds.Height);
+            Bounds = new Rectangle((int)position.X, (int)position.Y, background.Bounds.Width, background.Bounds.Height);
 
             deckSprite = new Sprite(background, new Vector2(Bounds.X, Bounds.Y), Color.Green);
-            discardPileSprite = new Sprite(background, new Vector2(Bounds.X + cardOffset, Bounds.Y), Color.DarkGray);
 
             gameFont = content.Load<SpriteFont>("gameFont");
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            deckCount = player.DeckCount;
-            discardPileCount = player.DiscardPile.Count;
+            deckCount = corp.DeckCount;
 
             if (deckCount > 0) 
                 deckSprite.Texture = background;
@@ -71,17 +66,6 @@ namespace Netrunner.View
                 gameFont.MeasureString(text) / 2;
             spriteBatch.DrawString(gameFont, text, textPos, Color.White);
 
-            
-            if (discardPileCount > 0) 
-                discardPileSprite.Texture = background;
-            else 
-                discardPileSprite.Texture = backgroundEmpty;
-
-            discardPileSprite.Draw(spriteBatch);
-            text = discardPileCount.ToString();
-            textPos = discardPileSprite.Position + (new Vector2(discardPileSprite.Texture.Bounds.Width, discardPileSprite.Texture.Bounds.Height)) / 2 -
-                gameFont.MeasureString(text) / 2;
-            spriteBatch.DrawString(gameFont, text, textPos, Color.White);  
         }
 
     }

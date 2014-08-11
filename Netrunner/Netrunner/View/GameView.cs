@@ -15,14 +15,12 @@ namespace Netrunner.View
         private SpriteBatch spriteBatch;
 
         private int width;
+        private int height;
 
         private HandView localHand;
         private HandView remoteHand;
 
-        private MainBoardView localMainBoard;
-        private MainBoardView remoteMainBoard;
-
-        private RemoteServersView remoteServers;
+        private CorporationView corpView;
 
         private List<View> views;
 
@@ -42,10 +40,7 @@ namespace Netrunner.View
             localHand = new HandView();
             remoteHand = new HandView();
 
-            localMainBoard = new MainBoardView(GameModel.Instance.LocalPlayer);
-            remoteMainBoard = new MainBoardView(GameModel.Instance.RemotePlayer);
-
-            remoteServers = new RemoteServersView();
+            corpView = new CorporationView();
 
             base.Initialize();
         }
@@ -55,19 +50,15 @@ namespace Netrunner.View
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             width = GraphicsDevice.Viewport.Bounds.Width;
+            height = GraphicsDevice.Viewport.Bounds.Height;
 
             localHand.LoadContent(Game.Content);
-            remoteHand.LoadContent(Game.Content);
-            localMainBoard.LoadContent(Game.Content, new Vector2(width / 2, 640));
-            remoteMainBoard.LoadContent(Game.Content, new Vector2((width / 2), 60));
-            remoteServers.LoadContent(Game.Content, new Vector2(width / 2, 640));
+            remoteHand.LoadContent(Game.Content);            
+
+            corpView.LoadContent(Game.Content, new Rectangle(0, 0, width, height / 2));
 
             views = new List<View>();
-            //views.Add(localHand);
-            //views.Add(remoteHand);
-            views.Add(localMainBoard);
-            views.Add(remoteMainBoard);
-            views.Add(remoteServers);
+            views.Add(corpView);
             
         }
 
@@ -77,11 +68,6 @@ namespace Netrunner.View
             Player remotePlayer = model.RemotePlayer;
             localHand.Cards = localPlayer.Hand;
             remoteHand.Cards = remotePlayer.Hand;
-
-            if (localPlayer is Corporation) {
-                Corporation corp = (Corporation)localPlayer;
-                remoteServers.Update(corp.RemoteServers);
-            }
 
             mouseState = Mouse.GetState();
 
@@ -103,13 +89,7 @@ namespace Netrunner.View
 
             spriteBatch.Begin();
 
-            localHand.Draw(new Vector2((4 * width / 5) - (localHand.Width / 2), 640), spriteBatch);
-            remoteHand.Draw(new Vector2((width / 5) - (remoteHand.Width / 2), 60), spriteBatch);
-
-            localMainBoard.Draw(spriteBatch);
-            remoteMainBoard.Draw(spriteBatch);
-
-            remoteServers.Draw(spriteBatch);
+            corpView.Draw(spriteBatch);
 
             spriteBatch.End();
         }

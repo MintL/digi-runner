@@ -16,11 +16,6 @@ namespace Netrunner.Core
         public Runner()
         {
             Hand = new List<Card>();
-            Hand.Add(new Card());
-            Hand.Add(new Card());
-            Hand.Add(new Card());
-            Hand.Add(new Card());
-            Hand.Add(new Card());
         }
     }
 }

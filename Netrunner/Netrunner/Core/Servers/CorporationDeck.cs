@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Netrunner.Core
+namespace Netrunner.Core.Servers
 {
-    public class Server
+    public class CorporationDeck
     {
-        public ICE ICEHead { get; set; }
-
+        public List<Card> ICE { get; set; }
+        public int CardCount { get; set; }
         public List<Card> Upgrades { get; set; }
-
-        public int Type { get; protected set; }
     }
 }
