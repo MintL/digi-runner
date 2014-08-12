@@ -15,8 +15,8 @@ namespace Netrunner.Core
         }
 
         public List<RemoteServer> RemoteServers { get; protected set; }
-        public CorporationDeck CorpDeck { get; protected set; }
-        public CorporationDiscard CorpDiscard { get; protected set; }
+        public CorporationDeck Deck { get; protected set; }
+        public CorporationDiscard Discard { get; protected set; }
 
         public Corporation()
         {
@@ -30,8 +30,14 @@ namespace Netrunner.Core
             RemoteServers.Add(new RemoteServer());
             RemoteServers.Add(new RemoteServer());
 
-            CorpDeck = new CorporationDeck();
-            CorpDiscard = new CorporationDiscard();
+            Deck = new CorporationDeck();
+            Discard = new CorporationDiscard();
+        }
+
+        public void OnDrawCard(Card card)
+        {
+            Deck.CardCount--;
+            Hand.Add(card);
         }
     }
 }

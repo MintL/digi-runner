@@ -10,9 +10,12 @@ namespace Netrunner.Subsystems
     {
         public void DrawCard()
         {
-            Card card = new Card(Card.Types.HIDDEN);
-
-            GameModel.Instance.LocalPlayer.OnDrawCard(card);
+            if (GameModel.Instance.LocalPlayer is Corporation) {
+                if (GameModel.Instance.Corporation.Deck.CardCount > 0) {
+                    Card card = new Card(Card.Types.HIDDEN);
+                    GameModel.Instance.Corporation.OnDrawCard(card);
+                }
+            }
         }
     }
 }

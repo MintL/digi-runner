@@ -67,7 +67,9 @@ namespace Netrunner.View
 
         public override void OnClicked(Point mouse)
         {
-            
+            if (deckView.Bounds.Contains(mouse)) {
+                deckView.OnClicked(mouse);
+            }
         }
     }
 }

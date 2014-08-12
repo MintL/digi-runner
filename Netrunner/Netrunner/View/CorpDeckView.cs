@@ -52,7 +52,7 @@ namespace Netrunner.View
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            deckCount = corp.DeckCount;
+            deckCount = corp.Deck.CardCount;
 
             if (deckCount > 0) 
                 deckSprite.Texture = background;

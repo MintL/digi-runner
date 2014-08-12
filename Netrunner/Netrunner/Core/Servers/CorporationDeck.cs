@@ -10,5 +10,12 @@ namespace Netrunner.Core.Servers
         public List<Card> ICE { get; set; }
         public int CardCount { get; set; }
         public List<Card> Upgrades { get; set; }
+
+        public CorporationDeck()
+        {
+            ICE = new List<Card>();
+            CardCount = 10;
+            Upgrades = new List<Card>();
+        }
     }
 }

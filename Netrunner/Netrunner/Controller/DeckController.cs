@@ -17,15 +17,12 @@ namespace Netrunner.Controller
 
         public void OnDeckClicked()
         {
-            int deckCount = model.LocalPlayer.DeckCount;
-            List<Card> hand = model.LocalPlayer.Hand;
-
-            if (deckCount > 0) {
-                model.Server.DrawCard();
-
-                
+            if (model.LocalPlayer is Corporation) {
+                int deckCount = model.Corporation.Deck.CardCount;
+                if (deckCount > 0) {
+                    model.Server.DrawCard();
+                }
             }
-
         }
     }
 }

@@ -16,8 +16,6 @@ namespace Netrunner.Core
         public int VictoryPoints { get; protected set; }
         public int Tags { get; protected set; }
 
-        public int DeckCount { get; protected set; }
-        public List<Card> DiscardPile { get; protected set; }
         public List<Card> Hand { get; protected set; }
 
         #endregion
@@ -25,14 +23,7 @@ namespace Netrunner.Core
 
         public Player()
         {
-            DeckCount = 10;
-            DiscardPile = new List<Card>();
         }
 
-        public void OnDrawCard(Card card)
-        {
-            DeckCount--;
-            Hand.Add(card);
-        }
     }
 }

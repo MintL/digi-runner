@@ -49,7 +49,7 @@ namespace Netrunner.View
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            discardPileCount = corp.DiscardPile.Count;
+            discardPileCount = corp.Discard.Pile.Count;
 
             if (discardPileCount > 0) 
                 discardPileSprite.Texture = background;
