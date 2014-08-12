@@ -21,6 +21,7 @@ namespace Netrunner.View
         private CorpDeckView deckView;
         private CorpDiscardView discardView;
         private List<RemoteServerView> remoteServerViews;
+        private HandView handView;
 
         private int serverOffsetX = 50;
 
@@ -30,6 +31,7 @@ namespace Netrunner.View
 
             deckView = new CorpDeckView(corp);
             discardView = new CorpDiscardView(corp);
+            handView = new HandView(corp);
         }
 
         public void LoadContent(ContentManager content, Rectangle bounds)
@@ -38,10 +40,10 @@ namespace Netrunner.View
             Bounds = bounds;
             cardWidth = content.Load<Texture2D>("card").Width;
 
-            corpDeckPos = new Vector2(Bounds.Width / 2, Bounds.Height / 2);
+            corpDeckPos = new Vector2(Bounds.Width / 2 - cardWidth, Bounds.Height / 2);
             deckView.LoadContent(content, corpDeckPos);
             discardView.LoadContent(content, corpDeckPos + Vector2.UnitX * (deckView.Bounds.Width + serverOffsetX));
-
+            handView.LoadContent(content, corpDeckPos + Vector2.UnitX * 2.1f * (deckView.Bounds.Width + serverOffsetX));
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -60,6 +62,7 @@ namespace Netrunner.View
 
                 remoteServerViews.Add(view);
 			}
+            handView.Draw(spriteBatch);
         }
 
         public override void OnClicked(Point mouse)

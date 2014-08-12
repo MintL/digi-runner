@@ -14,11 +14,8 @@ namespace Netrunner.View
         private GameModel model;
         private SpriteBatch spriteBatch;
 
-        private int width;
-        private int height;
-
-        private HandView localHand;
-        private HandView remoteHand;
+        private int screenWidth;
+        private int screenHeight;
 
         private CorporationView corpView;
 
@@ -35,10 +32,6 @@ namespace Netrunner.View
         public override void Initialize()
         {
             model = GameModel.Instance;
-            
-
-            localHand = new HandView();
-            remoteHand = new HandView();
 
             corpView = new CorporationView();
 
@@ -49,13 +42,10 @@ namespace Netrunner.View
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            width = GraphicsDevice.Viewport.Bounds.Width;
-            height = GraphicsDevice.Viewport.Bounds.Height;
+            screenWidth = GraphicsDevice.Viewport.Bounds.Width;
+            screenHeight = GraphicsDevice.Viewport.Bounds.Height;       
 
-            localHand.LoadContent(Game.Content);
-            remoteHand.LoadContent(Game.Content);            
-
-            corpView.LoadContent(Game.Content, new Rectangle(0, 0, width, height / 2));
+            corpView.LoadContent(Game.Content, new Rectangle(0, 0, screenWidth, screenHeight / 2));
 
             views = new List<View>();
             views.Add(corpView);
@@ -64,11 +54,6 @@ namespace Netrunner.View
 
         public override void Update(GameTime gameTime)
         {
-            Player localPlayer = model.LocalPlayer;
-            Player remotePlayer = model.RemotePlayer;
-            localHand.Cards = localPlayer.Hand;
-            remoteHand.Cards = remotePlayer.Hand;
-
             mouseState = Mouse.GetState();
 
             if (mouseState.LeftButton == ButtonState.Released && oldMouseState.LeftButton == ButtonState.Pressed) {

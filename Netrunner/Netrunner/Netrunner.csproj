@@ -111,7 +111,7 @@
     <Compile Include="Core\Corporation.cs" />
     <Compile Include="Core\GameModel.cs" />
     <Compile Include="Core\Player.cs" />
-    <Compile Include="Controller\MainBoardController.cs" />
+    <Compile Include="Controller\DeckController.cs" />
     <Compile Include="Core\Servers\CorporationDeck.cs" />
     <Compile Include="Core\Servers\CorporationDiscard.cs" />
     <Compile Include="Core\Servers\RemoteServer.cs" />

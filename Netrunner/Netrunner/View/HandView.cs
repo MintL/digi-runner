@@ -13,39 +13,40 @@ namespace Netrunner.View
     {
         private Texture2D background;
         private int cardOffset;
+        private Player player;
 
-        public int Width
+        public HandView(Player player)
         {
-            get
-            {
-                if (background != null && Cards != null) {
-                    return (cardOffset) * Cards.Count;
-                }
-                return 0;
-            }
+            this.player = player;
         }
 
-        public HandView() { }
+        public List<Card> Cards { get; protected set; }
 
-        public List<Card> Cards { get; set; }
-
-        public void LoadContent(ContentManager content)
+        public void LoadContent(ContentManager content, Vector2 position)
         {
             background = content.Load<Texture2D>("card");
-            cardOffset = 9 * background.Bounds.Width / 10;
+            cardOffset = background.Bounds.Width + 5;
+
+            int count = player.Hand.Count;
+            Bounds = new Rectangle((int)position.X, (int)position.Y, background.Bounds.Width + count * cardOffset, background.Bounds.Height);
         }
 
-        public void Draw(Vector2 position, SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
+            Cards = player.Hand;
+            Rectangle bounds = Bounds;
+            bounds.Width = background.Bounds.Width + Cards.Count * cardOffset;
+            Bounds = bounds;
+
             for (int i = 0; i < Cards.Count; i++) {
-                spriteBatch.Draw(background, new Vector2(position.X + i * cardOffset, position.Y), Color.White);
+                spriteBatch.Draw(background, new Vector2(Bounds.X + i * cardOffset, Bounds.Y), Color.White);
             }
                 
         }
 
         public override void OnClicked(Point mouse)
         {
-            throw new NotImplementedException();
+
         }
     }
 }

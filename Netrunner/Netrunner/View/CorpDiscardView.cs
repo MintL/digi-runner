@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Netrunner.Core;
-using Netrunner.Presenter;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
@@ -18,7 +17,6 @@ namespace Netrunner.View
 
         private Sprite discardPileSprite;
 
-        private MainBoardController controller;
         private Corporation corp;
 
         Texture2D background;

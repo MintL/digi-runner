@@ -7,20 +7,19 @@ using Netrunner.Core;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using Netrunner.Presenter;
+using Netrunner.Controller;
 
 namespace Netrunner.View
 {
     public class CorpDeckView : View
     {
         private SpriteFont gameFont;
-        private int cardOffset;
 
         private int deckCount;
 
         private Sprite deckSprite;
 
-        private MainBoardController controller;
+        private DeckController controller;
         private Corporation corp;
 
         Texture2D background;
@@ -28,7 +27,7 @@ namespace Netrunner.View
         
         public CorpDeckView(Corporation corp)
         {
-            controller = new MainBoardController();
+            controller = new DeckController();
             this.corp = corp;
         }
 

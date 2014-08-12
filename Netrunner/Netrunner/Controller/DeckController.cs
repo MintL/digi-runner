@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using Netrunner.Core;
 
-namespace Netrunner.Presenter
+namespace Netrunner.Controller
 {
-    public class MainBoardController
+    public class DeckController
     {
         private GameModel model;
 
-        public MainBoardController()
+        public DeckController()
         {
             this.model = GameModel.Instance;
         }
